@@ -3,6 +3,7 @@ from django.core import serializers
 from .models import Category, Event
 from django.views import generic
 from django.http import HttpResponse
+import datetime
 
 def categoryList(request):
     data = serializers.serialize(
@@ -17,3 +18,10 @@ def category(request, category_id):
         Event.objects.filter(category=category_id)
     )
     return HttpResponse(data)
+
+def categoryNow(request):
+    data = serializers.serialize(
+        'json', 
+        Event.objects.filter(begin__lte=datetime.date.today()).filter(end__gte=datetime.date.today())
+    )
+    return HttpResponse(data)    
