@@ -13,6 +13,8 @@ class Event(models.Model):
     category    = models.ForeignKey(Category, default=0)
     title       = models.CharField(max_length=30)
     logo        = models.ImageField()
+    background  = models.ImageField()
+    brand       = models.BooleanField()
     description = models.TextField()
     video       = models.TextField()
     begin       = models.DateField()

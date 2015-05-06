@@ -24,4 +24,11 @@ def categoryNow(request):
         'json', 
         Event.objects.filter(begin__lte=datetime.date.today()).filter(end__gte=datetime.date.today())
     )
-    return HttpResponse(data)    
+    return HttpResponse(data)  
+
+def event(request, event_id):
+    data = serializers.serialize(
+        'json',
+        Event.objects.filter(pk=event_id)
+    )
+    return HttpResponse(data)
