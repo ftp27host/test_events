@@ -15,14 +15,14 @@ def categoryList(request):
 def category(request, category_id):
     data = serializers.serialize(
         'json', 
-        Event.objects.filter(category=category_id)
+        Event.objects.filter(category=category_id).order_by('-brand','begin')
     )
     return HttpResponse(data)
 
 def categoryNow(request):
     data = serializers.serialize(
         'json', 
-        Event.objects.filter(begin__lte=datetime.date.today()).filter(end__gte=datetime.date.today())
+        Event.objects.filter(begin__lte=datetime.date.today()).filter(end__gte=datetime.date.today()).order_by('-brand','begin')
     )
     return HttpResponse(data)  
 
